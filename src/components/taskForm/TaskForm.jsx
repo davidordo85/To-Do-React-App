@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskForm.css';
 
 const TaskForm = () => {
   const today = new Date().toISOString().split('T')[0];
@@ -40,7 +41,7 @@ const TaskForm = () => {
   } = task;
   console.log(task);
   return (
-    <form className="add-task-container" onSubmit={handleAddTask}>
+    <form className="add-task-form" onSubmit={handleAddTask}>
       <div className="text-input-container">
         <label htmlFor="text">Task</label>
         <input
