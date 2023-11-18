@@ -1,8 +1,11 @@
+import TaskForm from './components/taskForm/TaskForm';
+
 function App() {
   return (
-    <>
-      <h1>ToDo app</h1>
-    </>
+    <main className="main-container">
+      <h1 className="title-todo">ToDo app</h1>
+      <TaskForm />
+    </main>
   );
 }
 
