@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TaskForm.css';
 
-const TaskForm = ({ onClose }) => {
+const TaskForm = ({ onClose, onAddTask }) => {
   const today = new Date().toISOString().split('T')[0];
   const [task, setTask] = React.useState({
     text: '',
@@ -30,6 +30,8 @@ const TaskForm = ({ onClose }) => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const newTaskList = [...storedTasks, task];
     localStorage.setItem('tasks', JSON.stringify(newTaskList));
+    onAddTask(task);
+    onClose();
   };
 
   const {
@@ -41,7 +43,7 @@ const TaskForm = ({ onClose }) => {
     status,
     color,
   } = task;
-  console.log(task);
+
   return (
     <form className="add-task-form" onSubmit={handleAddTask}>
       <button className="close" type="button" onClick={onClose}>
@@ -56,6 +58,7 @@ const TaskForm = ({ onClose }) => {
           value={text}
           onChange={handleChange}
           aria-label="Enter your task"
+          required
         />
       </div>
       <div className="date-input-container">
@@ -79,6 +82,7 @@ const TaskForm = ({ onClose }) => {
           value={description}
           onChange={handleChange}
           aria-label="Enter your description"
+          required
         />
       </div>
       <div className="priority-input-container">
@@ -138,7 +142,7 @@ const TaskForm = ({ onClose }) => {
 };
 
 TaskForm.propTypes = {
-  showForm: PropTypes.bool,
+  onAddTask: PropTypes.func,
   onClose: PropTypes.func,
 };
 

@@ -11,13 +11,23 @@ function App() {
     }
   }, []);
 
-  console.log(storedData, showForm);
+  const handleAddTask = newTask => {
+    const newTaskList = [...(storedData || []), newTask];
+    setStoredData(newTaskList);
+    localStorage.setItem('tasks', JSON.stringify(newTaskList));
+  };
+
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
       <TaskList tasks={storedData} onShowTaskForm={() => setShowForm(true)} />
 
-      {showForm && <TaskForm onClose={() => setShowForm(false)} />}
+      {showForm && (
+        <TaskForm
+          onClose={() => setShowForm(false)}
+          onAddTask={handleAddTask}
+        />
+      )}
     </main>
   );
 }
