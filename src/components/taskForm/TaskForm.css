@@ -1,5 +1,80 @@
 .add-task-form {
     display: flex;
     flex-direction: column;
-    border: solid black 0.1rem;
+    position: absolute;
+    min-width: 60%;
+    top: 50%;
+    left: 50%;
+    padding: 1.25rem;
+    border: 2rem solid #001f3f;
+    background-color: #003366;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 0.625rem rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transform: translate(-50%, -50%) scale(0);
+    animation: grow 1s forwards;
+}
+
+@keyframes grow {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.add-task-form>div {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+#text,
+#date,
+#description,
+#priority,
+#estimatedDuration,
+#status,
+#color {
+    background-color: transparent;
+    color: white;
+    border-bottom: #001f3f solid 0.2rem;
+}
+
+#color {
+    border: none;
+}
+
+.close {
+    position: absolute;
+    top: -6.5%;
+    left: 90%;
+    appearance: none;
+    padding: 0.1rem 0.7rem;
+    background-color: red;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    background-color: red;
+}
+
+#color {
+    width: 100%;
+}
+
+.add-task {
+    border-radius: 3rem;
+    padding: 0.5rem;
+    color: white;
+    background-color: transparent;
+    border: #001f3f solid 0.2rem;
+}
+
+.add-task:hover {
+    background-color: #001f3f;
 }

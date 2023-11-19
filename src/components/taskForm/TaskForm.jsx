@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './TaskForm.css';
 
-const TaskForm = () => {
+const TaskForm = ({ onClose }) => {
   const today = new Date().toISOString().split('T')[0];
   const [task, setTask] = React.useState({
     text: '',
@@ -26,7 +27,9 @@ const TaskForm = () => {
 
   const handleAddTask = event => {
     event.preventDefault();
-    // añadir task
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const newTaskList = [...storedTasks, task];
+    localStorage.setItem('tasks', JSON.stringify(newTaskList));
   };
 
   const {
@@ -37,11 +40,13 @@ const TaskForm = () => {
     estimatedDuration,
     status,
     color,
-    createdDate,
   } = task;
   console.log(task);
   return (
     <form className="add-task-form" onSubmit={handleAddTask}>
+      <button className="close" type="button" onClick={onClose}>
+        X
+      </button>
       <div className="text-input-container">
         <label htmlFor="text">Task</label>
         <input
@@ -125,15 +130,16 @@ const TaskForm = () => {
           aria-label="Select task color"
         />
       </div>
-      <div>
-        <label>Created date</label>
-        <input type="text" value={createdDate} readOnly />
-      </div>
       <button type="submit" className="add-task">
         Add task
       </button>
     </form>
   );
+};
+
+TaskForm.propTypes = {
+  showForm: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
 export default TaskForm;
