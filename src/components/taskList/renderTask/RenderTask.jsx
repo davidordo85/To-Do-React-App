@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import storage from '../../../utils/storage';
 
 const RenderTask = ({
+  index,
   text,
   date,
   description,
@@ -9,11 +11,18 @@ const RenderTask = ({
   estimatedDuration,
   priority,
   status,
+  updateData,
 }) => {
   const formatDate = date => {
     const [year, month, day] = date.split('-');
     return `${day}-${month}-${year}`;
   };
+
+  const handleDeleteTask = index => {
+    storage.removeTask(index);
+    updateData();
+  };
+
   return (
     <div className="task-container">
       <div className="data-container">
@@ -74,13 +83,19 @@ const RenderTask = ({
       <div className="button-task-container">
         <button className="modify-button">Modify</button>
         <button className="complete-button">Complete</button>
-        <button className="delete-button">Delete</button>
+        <button
+          className="delete-button"
+          onClick={() => handleDeleteTask(index)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
 };
 
 RenderTask.propTypes = {
+  index: PropTypes.number,
   text: PropTypes.string,
   date: PropTypes.string,
   description: PropTypes.string,
@@ -89,6 +104,7 @@ RenderTask.propTypes = {
   estimatedDuration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   priority: PropTypes.string,
   status: PropTypes.string,
+  updateData: PropTypes.func,
 };
 
 export default RenderTask;

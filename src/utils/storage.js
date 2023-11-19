@@ -11,10 +11,19 @@ const storage = {
 
   set(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
+    console.log(key, value);
   },
 
   remove(key) {
     localStorage.removeItem(key);
+  },
+
+  removeTask(index) {
+    const tasks = this.get('tasks') || [];
+    console.log(tasks);
+    tasks.splice(index, 1);
+    console.log('update', tasks);
+    this.set('tasks', tasks);
   },
 };
 

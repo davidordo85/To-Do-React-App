@@ -6,11 +6,15 @@ function App() {
   const [storedData, setStoredData] = React.useState(null);
   const [showForm, setShowForm] = React.useState(false);
   React.useEffect(() => {
+    updateData();
+  }, []);
+
+  const updateData = () => {
     const dataFromStorage = storage.get('tasks');
     if (dataFromStorage) {
       setStoredData(dataFromStorage);
     }
-  }, []);
+  };
 
   const handleAddTask = newTask => {
     const updatedTasks = [...(storedData || []), newTask];
@@ -29,7 +33,11 @@ function App() {
       <button className="delete-button all" onClick={deleteTasks}>
         Delete all tasks
       </button>
-      <TaskList tasks={storedData} onShowTaskForm={() => setShowForm(true)} />
+      <TaskList
+        tasks={storedData}
+        onShowTaskForm={() => setShowForm(true)}
+        updateData={updateData}
+      />
 
       {showForm && (
         <TaskForm

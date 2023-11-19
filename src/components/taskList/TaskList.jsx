@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { RenderTask } from './renderTask';
 import './TaskList.css';
 
-const TaskList = ({ tasks, onShowTaskForm }) => {
+const TaskList = ({ tasks, onShowTaskForm, updateData }) => {
   const renderTasks = (task, index) => {
-    return <RenderTask key={index} {...task} />;
+    return <RenderTask key={index} {...task} updateData={updateData} />;
   };
   return (
     <div className="tasks-list-container">
@@ -23,6 +23,7 @@ const TaskList = ({ tasks, onShowTaskForm }) => {
 TaskList.propTypes = {
   tasks: PropTypes.array,
   onShowTaskForm: PropTypes.func,
+  updateData: PropTypes.func,
 };
 
 export default TaskList;
