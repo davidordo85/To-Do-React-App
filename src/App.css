@@ -13,4 +13,9 @@
 .title-todo {
     text-align: center;
     font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.deleted-created-container>button {
+    min-width: 50%;
 }

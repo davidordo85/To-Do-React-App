@@ -30,14 +30,18 @@ function App() {
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
-      <button className="delete-button all" onClick={deleteTasks}>
-        Delete all tasks
-      </button>
-      <TaskList
-        tasks={storedData}
-        onShowTaskForm={() => setShowForm(true)}
-        updateData={updateData}
-      />
+      <div className="deleted-created-container">
+        <button className="delete-button all" onClick={deleteTasks}>
+          Delete all tasks
+        </button>
+        <button
+          className="create-task-button"
+          onClick={() => setShowForm(true)}
+        >
+          Create Task
+        </button>
+      </div>
+      <TaskList tasks={storedData} updateData={updateData} />
 
       {showForm && (
         <TaskForm

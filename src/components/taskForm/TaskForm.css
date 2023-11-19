@@ -40,6 +40,10 @@
     border-bottom: #001f3f solid 0.2rem;
 }
 
+option {
+    color: black;
+}
+
 #color {
     border: none;
 }
