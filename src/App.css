@@ -7,10 +7,12 @@
     border-radius: 0.5rem;
     padding: 1rem;
     color: white;
-    min-height: 80.4vh;
+    min-height: 87.7vh;
 }
 
 .title-todo {
     text-align: center;
     font-size: 3rem;
 }
+
+.delete-button.all {}

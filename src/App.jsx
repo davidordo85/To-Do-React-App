@@ -1,25 +1,34 @@
 import React from 'react';
 import { TaskList, TaskForm } from './components';
+import storage from './utils/storage';
 import './App.css';
 function App() {
   const [storedData, setStoredData] = React.useState(null);
   const [showForm, setShowForm] = React.useState(false);
   React.useEffect(() => {
-    const dataFromStorage = localStorage.getItem('tasks');
+    const dataFromStorage = storage.get('tasks');
     if (dataFromStorage) {
-      setStoredData(JSON.parse(dataFromStorage));
+      setStoredData(dataFromStorage);
     }
   }, []);
 
   const handleAddTask = newTask => {
-    const newTaskList = [...(storedData || []), newTask];
-    setStoredData(newTaskList);
-    localStorage.setItem('tasks', JSON.stringify(newTaskList));
+    const updatedTasks = [...(storedData || []), newTask];
+    setStoredData(updatedTasks);
+    storage.set('tasks', updatedTasks);
+  };
+
+  const deleteTasks = () => {
+    storage.remove('tasks');
+    setStoredData(null);
   };
 
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
+      <button className="delete-button all" onClick={deleteTasks}>
+        Delete all tasks
+      </button>
       <TaskList tasks={storedData} onShowTaskForm={() => setShowForm(true)} />
 
       {showForm && (
