@@ -16,6 +16,14 @@
     margin-bottom: 1rem;
 }
 
+.deleted-created-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
 .deleted-created-container>button {
-    min-width: 50%;
+
+
+    min-width: 40%;
 }

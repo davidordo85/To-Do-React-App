@@ -48,15 +48,17 @@ function App() {
     }
   };
 
-  console.log(confirmStep);
+  console.log(storedData);
 
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
       <div className="deleted-created-container">
-        <button className="delete-button all" onClick={deleteTasks}>
-          Delete all tasks
-        </button>
+        {storedData ? (
+          <button className="delete-button all" onClick={deleteTasks}>
+            Delete all tasks
+          </button>
+        ) : null}
         <button
           className="create-task-button"
           onClick={() => setShowForm(true)}
