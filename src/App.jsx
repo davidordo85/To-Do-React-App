@@ -1,21 +1,23 @@
 import React, { useCallback } from 'react';
 import { TaskList, TaskForm } from './components';
 import storage from './utils/storage';
-import './App.css';
 import Alert from './components/shared/alert/Alert';
+import './App.css';
 function App() {
   const [storedData, setStoredData] = React.useState(null);
   const [showForm, setShowForm] = React.useState(false);
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
-  const [message, setMessage] = React.useState(null);
+  const [message, setMessage] = React.useState('null');
   const [confirmStep, setConfirmStep] = React.useState(0);
 
+  // funcion que añade nuevas tareas
   const handleAddTask = newTask => {
     const updatedTasks = [...(storedData || []), newTask];
     setStoredData(updatedTasks);
     storage.set('tasks', updatedTasks);
   };
 
+  // funcion que hace funcionar el alert correctamente
   const deleteTasks = useCallback(() => {
     setShowConfirmAlert(true);
     if (confirmStep === 0) {
@@ -34,13 +36,7 @@ function App() {
     }
   }, [confirmStep]);
 
-  React.useEffect(() => {
-    updateData();
-    if (confirmStep > 0) {
-      deleteTasks();
-    }
-  }, [confirmStep, deleteTasks]);
-
+  // funcion que recoge las tareas del local storage
   const updateData = () => {
     const dataFromStorage = storage.get('tasks');
     if (dataFromStorage) {
@@ -48,7 +44,16 @@ function App() {
     }
   };
 
-  console.log(storedData);
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
+
+  React.useEffect(() => {
+    updateData();
+    if (confirmStep > 0) {
+      deleteTasks();
+    }
+  }, [confirmStep, deleteTasks]);
 
   return (
     <main className="main-container">
@@ -59,13 +64,11 @@ function App() {
             Delete all tasks
           </button>
         ) : null}
-        <button
-          className="create-task-button"
-          onClick={() => setShowForm(true)}
-        >
+        <button className="create-task-button" onClick={handleShowForm}>
           Create Task
         </button>
       </div>
+      {storedData ? <div>filter</div> : ''}
       {showConfirmAlert ? (
         <Alert
           message={message}
