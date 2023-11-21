@@ -1,4 +1,6 @@
+import React from 'react';
 import PropTypes from 'prop-types';
+import Alert from '../../shared/alert/Alert';
 import storage from '../../../utils/storage';
 
 const RenderTask = ({
@@ -13,6 +15,7 @@ const RenderTask = ({
   status,
   updateData,
 }) => {
+  const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
   const formatDate = date => {
     const [year, month, day] = date.split('-');
     return `${day}-${month}-${year}`;
@@ -20,11 +23,19 @@ const RenderTask = ({
 
   const handleDeleteTask = index => {
     storage.removeTask(index);
+    setShowConfirmAlert(false);
     updateData();
   };
 
   return (
     <div className="task-container">
+      {showConfirmAlert ? (
+        <Alert
+          message={'Are you sure you want to delete this task?'}
+          onClose={() => setShowConfirmAlert(false)}
+          onConfirm={() => handleDeleteTask(index)}
+        />
+      ) : null}
       <div className="data-container">
         <p className="task-paragraph">
           <strong>Task:</strong>
@@ -85,7 +96,7 @@ const RenderTask = ({
         <button className="complete-button">Complete</button>
         <button
           className="delete-button"
-          onClick={() => handleDeleteTask(index)}
+          onClick={() => setShowConfirmAlert(true)}
         >
           Delete
         </button>

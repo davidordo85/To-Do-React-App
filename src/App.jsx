@@ -55,11 +55,13 @@ function App() {
     }
   }, [confirmStep, deleteTasks]);
 
+  console.log(storedData);
+
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
       <div className="deleted-created-container">
-        {storedData ? (
+        {storedData && Array.isArray(storedData) && storedData.length > 0 ? (
           <button className="delete-button all" onClick={deleteTasks}>
             Delete all tasks
           </button>
@@ -68,7 +70,7 @@ function App() {
           Create Task
         </button>
       </div>
-      {storedData ? <div>filter</div> : ''}
+
       {showConfirmAlert ? (
         <Alert
           message={message}
