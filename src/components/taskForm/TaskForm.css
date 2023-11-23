@@ -34,7 +34,10 @@
 #priority,
 #estimatedDuration,
 #status,
-#color {
+#color,
+#from,
+#to,
+#title {
     background-color: transparent;
     color: white;
     border-bottom: #001f3f solid 0.2rem;

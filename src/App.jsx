@@ -55,8 +55,6 @@ function App() {
     }
   }, [confirmStep, deleteTasks]);
 
-  console.log(storedData);
-
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
