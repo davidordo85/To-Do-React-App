@@ -1,0 +1,15 @@
+.buttons-filter-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: space-around;
+}
+
+.reset-button,
+.filter-button {
+    border-radius: 3rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: white;
+    min-width: 40%;
+    background-color: #001f3f;
+}

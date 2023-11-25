@@ -2,13 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function FilterForm({ onClose, onSubmit }) {
-  const [tasksFilter, setTasksFilter] = React.useState({
+  const initialState = {
     text: '',
     from: '',
     to: '',
     priority: '',
     estimatedDuration: '',
     status: '',
+  };
+  const [resetClicked, setResetClicked] = React.useState(false);
+  const [tasksFilter, setTasksFilter] = React.useState({
+    ...initialState,
   });
 
   const handleChange = event => {
@@ -25,15 +29,33 @@ function FilterForm({ onClose, onSubmit }) {
 
   const handleFilterTasks = event => {
     event.preventDefault();
-    onSubmit(tasksFilter);
-    onClose();
+    if (resetClicked) {
+      setResetClicked(false);
+      return;
+    }
+    const filteredTasksFilter = Object.keys(tasksFilter).reduce((acc, key) => {
+      if (tasksFilter[key] !== '') {
+        acc[key] = tasksFilter[key];
+      }
+      return acc;
+    }, {});
+    onSubmit(filteredTasksFilter);
+    //onClose();
   };
+
+  const handleResetClick = () => {
+    // Marca que el botón de reinicio se ha presionado
+    setResetClicked(true);
+    // Restablece el estado
+    setTasksFilter(initialState);
+  };
+
   return (
     <form className="add-task-form" onSubmit={handleFilterTasks}>
       <button className="close" type="button" onClick={onClose}>
         X
       </button>
-      <button>Reset Filter</button>
+
       <div className="text-input-container">
         <label htmlFor="text">Task</label>
         <input
@@ -67,17 +89,6 @@ function FilterForm({ onClose, onSubmit }) {
           aria-label="Select to date"
         />
       </div>
-      <div className="date-input-container">
-        <label htmlFor="orderDirection">Order</label>
-        <input
-          type="radio"
-          id="orderDirection"
-          name="orderDirection"
-          /* value={date}
-          onChange={handleChange} */
-          aria-label="Select order date"
-        />
-      </div>
       <div className="priority-input-container">
         <label htmlFor="priority">Priority</label>
         <select
@@ -87,6 +98,7 @@ function FilterForm({ onClose, onSubmit }) {
           onChange={handleChange}
           aria-label="Select task priority"
         >
+          <option>Select one option...</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
@@ -101,6 +113,7 @@ function FilterForm({ onClose, onSubmit }) {
           onChange={handleChange}
           aria-label="Select estimated duration order"
         >
+          <option>Select one option...</option>
           <option value="asc">Short to Long</option>
           <option value="desc">Long to Short</option>
         </select>
@@ -114,11 +127,21 @@ function FilterForm({ onClose, onSubmit }) {
           onChange={handleChange}
           aria-label="Select task status"
         >
+          <option>Select one option...</option>
           <option value="pending">Pending</option>
           <option value="in-progress">In Progress</option>
         </select>
       </div>
-      <button type="submit">Apply Filters</button>
+      <div>
+        <div className="buttons-filter-container">
+          <button className="reset-button" onClick={handleResetClick}>
+            Reset Filter
+          </button>
+          <button className="filter-button" type="submit">
+            Apply Filters
+          </button>
+        </div>
+      </div>
     </form>
   );
 }
