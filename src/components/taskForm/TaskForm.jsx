@@ -93,6 +93,7 @@ const TaskForm = ({ onClose, onAddTask }) => {
           value={priority}
           onChange={handleChange}
           aria-label="Select task priority"
+          required
         >
           <option value="low">Low</option>
           <option value="medium">Medium</option>

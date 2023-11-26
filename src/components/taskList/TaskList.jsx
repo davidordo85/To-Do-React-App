@@ -4,7 +4,9 @@ import './TaskList.css';
 
 const TaskList = ({ tasks, updateData }) => {
   const renderTasks = (task, index) => {
-    return <RenderTask key={index} {...task} updateData={updateData} />;
+    return (
+      <RenderTask key={index} index={index} {...task} updateData={updateData} />
+    );
   };
   return (
     <div className="tasks-list-container">

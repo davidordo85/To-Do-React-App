@@ -27,6 +27,15 @@ const RenderTask = ({
     updateData();
   };
 
+  const handleCompleteTask = index => {
+    const updatedTasks = [...storage.get('tasks')];
+    console.log(updatedTasks, index);
+    updatedTasks[index].status = 'Complete';
+    storage.set('tasks', updatedTasks);
+
+    updateData();
+  };
+
   return (
     <div className="task-container">
       {showConfirmAlert ? (
@@ -93,7 +102,12 @@ const RenderTask = ({
       </div>
       <div className="button-task-container">
         <button className="modify-button">Modify</button>
-        <button className="complete-button">Complete</button>
+        <button
+          className="complete-button"
+          onClick={() => handleCompleteTask(index)}
+        >
+          Complete
+        </button>
         <button
           className="delete-button"
           onClick={() => setShowConfirmAlert(true)}
