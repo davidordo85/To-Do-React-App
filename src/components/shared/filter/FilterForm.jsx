@@ -40,13 +40,11 @@ function FilterForm({ onClose, onSubmit }) {
       return acc;
     }, {});
     onSubmit(filteredTasksFilter);
-    //onClose();
+    onClose();
   };
 
   const handleResetClick = () => {
-    // Marca que el botón de reinicio se ha presionado
     setResetClicked(true);
-    // Restablece el estado
     setTasksFilter(initialState);
   };
 

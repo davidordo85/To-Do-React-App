@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
-import { TaskList, TaskForm } from './components';
+import { TaskList, TaskForm, Filter } from './components';
 import storage from './utils/storage';
 import Alert from './components/shared/alert/Alert';
 import './App.css';
 function App() {
   const [storedData, setStoredData] = React.useState(null);
+  const [filteredTasks, setFilteredTasks] = React.useState(null);
   const [showForm, setShowForm] = React.useState(false);
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
   const [message, setMessage] = React.useState('null');
@@ -55,6 +56,11 @@ function App() {
     }
   }, [confirmStep, deleteTasks]);
 
+  const handleFilterSubmit = filterTask => {
+    setFilteredTasks(filterTask);
+    console.log(filterTask);
+  };
+
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
@@ -76,13 +82,23 @@ function App() {
           onConfirm={() => setConfirmStep(confirmStep + 1)}
         />
       ) : null}
-      <TaskList tasks={storedData} updateData={updateData} />
+
+      {storedData && Array.isArray(storedData) && storedData.length > 0 ? (
+        <Filter
+          tasks={storedData}
+          onSubmit={handleFilterSubmit}
+          resetFilter={() => setFilteredTasks(storedData)}
+        />
+      ) : null}
+      <TaskList tasks={filteredTasks || storedData} updateData={updateData} />
 
       {showForm && (
-        <TaskForm
-          onClose={() => setShowForm(false)}
-          onAddTask={handleAddTask}
-        />
+        <div>
+          <TaskForm
+            onClose={() => setShowForm(false)}
+            onAddTask={handleAddTask}
+          />
+        </div>
       )}
     </main>
   );

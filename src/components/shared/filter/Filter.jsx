@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FilterForm from './FilterForm';
 import './Filter.css';
 
-function Filter({ tasks }) {
+function Filter({ tasks, onSubmit, resetFilter }) {
   const [showFilterForm, setFilterForm] = React.useState(false);
 
   const filterText = (filterDataString, taskString) => {
@@ -13,7 +13,6 @@ function Filter({ tasks }) {
   };
 
   const filterDateRange = (taskDate, from, to) => {
-    // Verificar si from o to son valores válidos antes de realizar la comparación
     if (!from && !to) {
       return false;
     }
@@ -55,13 +54,17 @@ function Filter({ tasks }) {
         return 0;
       });
 
-    console.log(filterTask);
-    return filterTask;
+    onSubmit(filterTask);
   };
 
   return (
-    <div>
-      <button onClick={() => setFilterForm(true)}>Filter</button>
+    <div className="buttons-filter-container">
+      <button className="filter-button" onClick={() => setFilterForm(true)}>
+        Filter
+      </button>
+      <button className="filter-button" onClick={resetFilter}>
+        Reset Filter
+      </button>
       {showFilterForm ? (
         <FilterForm
           onSubmit={handleFilterSubmit}
@@ -74,6 +77,8 @@ function Filter({ tasks }) {
 
 Filter.propTypes = {
   tasks: PropTypes.array,
+  onSubmit: PropTypes.func,
+  resetFilter: PropTypes.func,
 };
 
 export default Filter;
