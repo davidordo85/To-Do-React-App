@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { TaskList, TaskForm, Filter } from './components';
+import { TaskLists, TaskForm, Filter } from './components';
 import storage from './utils/storage';
 import Alert from './components/shared/alert/Alert';
 import './App.css';
@@ -45,9 +45,9 @@ function App() {
     }
   };
 
-  const handleShowForm = () => {
+  /*   const handleShowForm = () => {
     setShowForm(true);
-  };
+  }; */
 
   React.useEffect(() => {
     updateData();
@@ -64,7 +64,7 @@ function App() {
   return (
     <main className="main-container">
       <h1 className="title-todo">ToDo app</h1>
-      <div className="deleted-created-container">
+      {/* <div className="deleted-created-container">
         {storedData && Array.isArray(storedData) && storedData.length > 0 ? (
           <button className="delete-button all" onClick={deleteTasks}>
             Delete all tasks
@@ -73,7 +73,7 @@ function App() {
         <button className="create-task-button" onClick={handleShowForm}>
           Create Task
         </button>
-      </div>
+      </div> */}
 
       {showConfirmAlert ? (
         <Alert
@@ -90,7 +90,8 @@ function App() {
           resetFilter={() => setFilteredTasks(storedData)}
         />
       ) : null}
-      <TaskList tasks={filteredTasks || storedData} updateData={updateData} />
+      {/* <TaskList tasks={filteredTasks || storedData} updateData={updateData} /> */}
+      <TaskLists />
 
       {showForm && (
         <div>

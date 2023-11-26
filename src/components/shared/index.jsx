@@ -1,1 +1,1 @@
-export { default } from './filter/Filter';
+export { default as CloseFormButton } from './closeFormButton';

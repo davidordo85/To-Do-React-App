@@ -1,0 +1,18 @@
+.close {
+    position: absolute;
+    top: -6.5%;
+    left: 90%;
+    appearance: none;
+    padding: 0.1rem 0.7rem;
+    background-color: red;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    background-color: red;
+}
