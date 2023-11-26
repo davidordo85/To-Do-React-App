@@ -16,6 +16,8 @@ const RenderTask = ({
   updateData,
 }) => {
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
   const formatDate = date => {
     const [year, month, day] = date.split('-');
     return `${day}-${month}-${year}`;
@@ -29,7 +31,6 @@ const RenderTask = ({
 
   const handleCompleteTask = index => {
     const updatedTasks = [...storage.get('tasks')];
-    console.log(updatedTasks, index);
     updatedTasks[index].status = 'Complete';
     storage.set('tasks', updatedTasks);
 
@@ -37,7 +38,7 @@ const RenderTask = ({
   };
 
   return (
-    <div className="task-container">
+    <div className="task-container" onClick={() => setIsExpanded(!isExpanded)}>
       {showConfirmAlert ? (
         <Alert
           message={'Are you sure you want to delete this task?'}
@@ -46,53 +47,12 @@ const RenderTask = ({
         />
       ) : null}
       <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Task:</strong>
-        </p>
-        <span className="task-contain">{text}</span>
-      </div>
-      <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Task color:</strong>
-        </p>
-        <span
-          className={'task-color'}
-          style={{ backgroundColor: color }}
-        ></span>
-      </div>
-      <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Due date:</strong>
-        </p>
-        <span className="task-contain">{formatDate(date)}</span>
-      </div>
-      <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Description:</strong>
-        </p>
-        <span className="task-contain">{description}</span>
-      </div>
-      {estimatedDuration > 0 && (
-        <div className="data-container">
+        <div>
           <p className="task-paragraph">
-            <strong>Estimated duration:</strong>
+            <strong>Task:</strong>
           </p>
-          <span className="task-contain">
-            {estimatedDuration} {estimatedDuration > 1 ? 'hours' : 'hour'}
-          </span>
+          <span className="task-contain">{text}</span>
         </div>
-      )}
-      <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Created date:</strong>
-        </p>
-        <span className="task-contain">{formatDate(createdDate)}</span>
-      </div>
-      <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Priority:</strong>
-        </p>
-        <span className="task-contain">{priority}</span>
       </div>
       <div className="data-container">
         <p className="task-paragraph">
@@ -100,6 +60,55 @@ const RenderTask = ({
         </p>
         <span className="task-contain">{status}</span>
       </div>
+
+      {isExpanded && (
+        <>
+          <div className="data-container">
+            <p className="task-paragraph">
+              <strong>Task color:</strong>
+            </p>
+            <span
+              className={'task-color'}
+              style={{ backgroundColor: color }}
+            ></span>
+          </div>
+          <div className="data-container">
+            <p className="task-paragraph">
+              <strong>Due date:</strong>
+            </p>
+            <span className="task-contain">{formatDate(date)}</span>
+          </div>
+          <div className="data-container">
+            <p className="task-paragraph">
+              <strong>Description:</strong>
+            </p>
+            <span className="task-contain">{description}</span>
+          </div>
+          {estimatedDuration > 0 && (
+            <div className="data-container">
+              <p className="task-paragraph">
+                <strong>Estimated duration:</strong>
+              </p>
+              <span className="task-contain">
+                {estimatedDuration} {estimatedDuration > 1 ? 'hours' : 'hour'}
+              </span>
+            </div>
+          )}
+          <div className="data-container">
+            <p className="task-paragraph">
+              <strong>Created date:</strong>
+            </p>
+            <span className="task-contain">{formatDate(createdDate)}</span>
+          </div>
+          <div className="data-container">
+            <p className="task-paragraph">
+              <strong>Priority:</strong>
+            </p>
+            <span className="task-contain">{priority}</span>
+          </div>
+        </>
+      )}
+
       <div className="button-task-container">
         <button className="modify-button">Modify</button>
         <button
