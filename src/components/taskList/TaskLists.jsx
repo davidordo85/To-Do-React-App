@@ -1,14 +1,29 @@
 import React from 'react';
+import storage from '../../utils/storage';
 import NameListForm from './nameListForm/NameListForm';
+import TaskList from './TaskList';
 
 function TaskLists() {
+  const [storedData, setStoredData] = React.useState([]);
   const [showNameForm, setShowNameForm] = React.useState(false);
-  const [lists, setLists] = React.useState([]);
 
-  const handleCreateList = newList => {
-    setLists(prevLists => [...prevLists, newList]);
-    setShowNameForm(false);
+  const updateData = () => {
+    const dataFromStorage = storage.get('lists');
+    console.log(dataFromStorage);
+    if (dataFromStorage) {
+      setStoredData(dataFromStorage);
+    }
   };
+
+  const handleAddTask = newList => {
+    const updatedTasks = [...storedData, newList];
+    setStoredData(updatedTasks);
+    storage.set('lists', updatedTasks);
+  };
+
+  React.useEffect(() => {
+    updateData();
+  }, []);
 
   return (
     <div>
@@ -16,14 +31,15 @@ function TaskLists() {
       {showNameForm ? (
         <NameListForm
           onClose={() => setShowNameForm(false)}
-          onAddNameList={handleCreateList}
+          onAddNameList={handleAddTask}
         />
       ) : null}
 
       <div>
-        {lists.map((list, index) => (
+        {storedData.map((list, index) => (
           <div key={index}>
             <h3>{list.name}</h3>
+            <TaskList />
           </div>
         ))}
       </div>

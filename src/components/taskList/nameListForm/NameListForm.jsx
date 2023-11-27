@@ -18,7 +18,6 @@ const NameListForm = ({ onAddNameList, onClose }) => {
   const handleAddList = event => {
     event.preventDefault();
     onAddNameList(formData);
-    console.log('ok', onAddNameList);
     onClose();
   };
 
