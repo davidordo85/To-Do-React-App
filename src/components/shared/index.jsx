@@ -1,1 +1,1 @@
-export { default as CloseFormButton } from './closeFormButton';
+export { default as Buttons } from './buttons';

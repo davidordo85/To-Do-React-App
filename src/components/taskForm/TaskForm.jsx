@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CloseFormButton } from '../shared';
+import { Buttons } from '../shared';
 import './TaskForm.css';
 
 const TaskForm = ({ onClose, onAddTask }) => {
@@ -47,7 +47,13 @@ const TaskForm = ({ onClose, onAddTask }) => {
 
   return (
     <form className="add-task-form" onSubmit={handleAddTask}>
-      <CloseFormButton onClick={onClose} />
+      <Buttons
+        className="closed"
+        type="button"
+        onClick={onClose}
+        label="X"
+        aria-label="close-form"
+      />
       <div className="text-input-container">
         <label htmlFor="text">Task</label>
         <input

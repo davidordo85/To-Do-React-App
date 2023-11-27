@@ -1,0 +1,73 @@
+.button-task-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.create-task-button,
+.create-lists-button,
+.modify-button,
+.complete-button,
+.delete-button {
+    border-radius: 3rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: white;
+    min-width: 30%;
+
+}
+
+.create-task-button,
+.create-lists-button {
+    background-color: #001f3f;
+}
+
+.modify-button {
+    background-color: lightseagreen;
+}
+
+.complete-button {
+    background-color: green;
+}
+
+.delete-button {
+    background-color: red;
+}
+
+
+
+.create-task-button:hover {
+    background-color: #001f3f;
+}
+
+
+.add-task {
+    border-radius: 3rem;
+    padding: 0.5rem;
+    color: white;
+    background-color: transparent;
+    border: #001f3f solid 0.2rem;
+}
+
+.add-task:hover {
+    background-color: #001f3f;
+}
+
+.close {
+    position: absolute;
+    top: -6.5%;
+    left: 90%;
+    appearance: none;
+    padding: 0.1rem 0.7rem;
+    background-color: red;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    background-color: red;
+}

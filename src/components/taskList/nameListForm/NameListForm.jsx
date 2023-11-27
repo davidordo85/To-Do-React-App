@@ -1,5 +1,5 @@
 import React from 'react';
-import { CloseFormButton } from '../../shared';
+import { Buttons } from '../../shared';
 import PropTypes from 'prop-types';
 
 const NameListForm = ({ onAddNameList, onClose }) => {
@@ -23,7 +23,13 @@ const NameListForm = ({ onAddNameList, onClose }) => {
 
   return (
     <form className="add-task-form" onSubmit={handleAddList}>
-      <CloseFormButton onClose={onClose} />
+      <Buttons
+        label="X"
+        type="button"
+        className="close"
+        ariaLabel="close-form"
+        onClick={onClose}
+      />
       <div className="text-input-container">
         <label htmlFor="name">Enter task name: </label>
         <input

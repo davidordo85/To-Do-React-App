@@ -54,15 +54,3 @@ option {
 #color {
     width: 100%;
 }
-
-.add-task {
-    border-radius: 3rem;
-    padding: 0.5rem;
-    color: white;
-    background-color: transparent;
-    border: #001f3f solid 0.2rem;
-}
-
-.add-task:hover {
-    background-color: #001f3f;
-}
