@@ -18,7 +18,7 @@ Buttons.propTypes = {
   label: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   ariaLabel: PropTypes.string.isRequired,
 };
 

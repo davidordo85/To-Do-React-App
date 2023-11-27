@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Buttons from '../buttons';
 import './Alert.css';
 
 function Alert({ message, onClose, onConfirm }) {
@@ -7,12 +8,20 @@ function Alert({ message, onClose, onConfirm }) {
       <div className="alert-container">
         <p className="alert-message">{message}</p>
         <div>
-          <button className="alert-button-confirm" onClick={onConfirm}>
-            Confirm
-          </button>
-          <button className="alert-button-cancel" onClick={onClose}>
-            Cancel
-          </button>
+          <Buttons
+            label="Confirm"
+            ariaLabel="Confirm"
+            type="button"
+            className="alert-button-confirm"
+            onClick={onConfirm}
+          />
+          <Buttons
+            label="Cancel"
+            ariaLabel="Cancel"
+            type="button"
+            className="alert-button-cancel"
+            onClick={onClose}
+          />
         </div>
       </div>
     </div>

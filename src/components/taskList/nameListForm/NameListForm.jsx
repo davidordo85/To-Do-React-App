@@ -42,7 +42,12 @@ const NameListForm = ({ onAddNameList, onClose }) => {
           required
         />
       </div>
-      <button type="submit">Create List</button>
+      <Buttons
+        label="Create list"
+        className="create-lists-button"
+        ariaLabel="Create new list"
+        type="submit"
+      />
     </form>
   );
 };
