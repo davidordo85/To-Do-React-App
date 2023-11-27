@@ -96,7 +96,7 @@ function TaskLists() {
         <div className="lists-container">
           {storedData.map((list, index) => (
             <div key={index} className={`list-container ${index}`}>
-              <h3>{list.name}</h3>
+              <h1 className="list-container-header">{list.name}</h1>
               <TaskList
                 listName={list.name}
                 tasks={list.tasks}

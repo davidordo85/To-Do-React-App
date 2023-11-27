@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Alert from '../../shared/alert/Alert';
-import storage from '../../../utils/storage';
+import Buttons from '../../shared/buttons';
+import './RenderTask.css';
 
 const RenderTask = ({
   index,
@@ -12,10 +13,10 @@ const RenderTask = ({
   createdDate,
   estimatedDuration,
   priority,
-  status,
   updateData,
 }) => {
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
+  const [optionExpanded, setOptionExpanded] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const formatDate = date => {
@@ -23,22 +24,20 @@ const RenderTask = ({
     return `${day}-${month}-${year}`;
   };
 
-  const handleDeleteTask = index => {
-    storage.removeTask(index);
-    setShowConfirmAlert(false);
-    updateData();
+  const handleToggleExpand = () => {
+    setOptionExpanded(!optionExpanded);
   };
 
-  const handleCompleteTask = index => {
-    const updatedTasks = [...storage.get('tasks')];
-    updatedTasks[index].status = 'Complete';
-    storage.set('tasks', updatedTasks);
+  const handleDetailExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-    updateData();
+  const handleDeleteTask = index => {
+    console.log('borrar task', index, updateData);
   };
 
   return (
-    <div className="task-container" onClick={() => setIsExpanded(!isExpanded)}>
+    <div className="task-container">
       {showConfirmAlert ? (
         <Alert
           message={'Are you sure you want to delete this task?'}
@@ -46,6 +45,41 @@ const RenderTask = ({
           onConfirm={() => handleDeleteTask(index)}
         />
       ) : null}
+      <div className="options-task-container">
+        <Buttons
+          label="..."
+          ariaLabel="options"
+          className="option-task-button"
+          type="button"
+          onClick={handleToggleExpand}
+        />
+        {optionExpanded && (
+          <div className="options-task-dropdown">
+            <Buttons
+              label="Detail task"
+              className="detail-task-button"
+              ariaLabel="Detail task"
+              type="button"
+              onClick={handleDetailExpand}
+            />
+            <Buttons
+              label="Modify"
+              className="modify-task-button"
+              ariaLabel="Modify task"
+              type="button"
+              /* onClick={handleDeleteTask} */
+            />
+            <Buttons
+              label="Delete"
+              className="delete-task-button"
+              ariaLabel="delete task"
+              type="button"
+              onClick={handleDeleteTask}
+            />
+            {/* Agrega otras opciones según sea necesario */}
+          </div>
+        )}
+      </div>
       <div className="data-container">
         <div>
           <p className="task-paragraph">
@@ -54,15 +88,9 @@ const RenderTask = ({
           <span className="task-contain">{text}</span>
         </div>
       </div>
-      <div className="data-container">
-        <p className="task-paragraph">
-          <strong>Status:</strong>
-        </p>
-        <span className="task-contain">{status}</span>
-      </div>
-
-      {isExpanded && (
+      {isExpanded ? (
         <>
+          {' '}
           <div className="data-container">
             <p className="task-paragraph">
               <strong>Task color:</strong>
@@ -107,23 +135,7 @@ const RenderTask = ({
             <span className="task-contain">{priority}</span>
           </div>
         </>
-      )}
-
-      <div className="button-task-container">
-        <button className="modify-button">Modify</button>
-        <button
-          className="complete-button"
-          onClick={() => handleCompleteTask(index)}
-        >
-          Complete
-        </button>
-        <button
-          className="delete-button"
-          onClick={() => setShowConfirmAlert(true)}
-        >
-          Delete
-        </button>
-      </div>
+      ) : null}
     </div>
   );
 };
@@ -137,7 +149,6 @@ RenderTask.propTypes = {
   createdDate: PropTypes.string,
   estimatedDuration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   priority: PropTypes.string,
-  status: PropTypes.string,
   updateData: PropTypes.func,
 };
 

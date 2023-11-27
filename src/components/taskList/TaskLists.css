@@ -1,3 +1,16 @@
 .lists-container {
     display: flex;
 }
+
+.list-container {
+    border: solid #001f3f 0.3rem;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.list-container-header {
+    text-align: center;
+    background-color: #001f3f;
+    padding: 1rem;
+    font-size: 1.5rem;
+}

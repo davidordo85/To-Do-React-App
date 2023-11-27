@@ -2,29 +2,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.task-container {
-    margin: 1rem;
-    padding: 1rem;
-    border: #001f3f solid 0.1rem;
-    border-radius: 1rem;
-}
-
-.data-container>.task-paragraph {
-    margin-top: 1rem;
-    margin-bottom: 0.3rem;
-}
-
-.task-paragraph {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.task-contain {
-    word-wrap: break-word;
-}
-
-.task-color {
-    width: 3rem;
-    height: 1rem;
-    display: inline-block;
-}
