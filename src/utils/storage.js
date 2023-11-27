@@ -1,5 +1,5 @@
 const storage = {
-  get(key) {
+  getList(key) {
     try {
       const valueLocal = localStorage.getItem(key);
       return valueLocal ? JSON.parse(valueLocal) : null;
@@ -9,18 +9,31 @@ const storage = {
     }
   },
 
-  set(key, value) {
+  setList(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   },
 
-  remove(key) {
+  removeList(key) {
     localStorage.removeItem(key);
   },
 
-  removeTask(index) {
-    const tasks = this.get('tasks') || [];
-    tasks.splice(index, 1);
-    this.set('tasks', tasks);
+  getListTasks(listName) {
+    const lists = this.getList('lists');
+    console.log('lists:', lists, 'listName:', listName);
+    const list = lists.find(list => list.name === listName);
+    console.log('list:', list);
+    return list ? list.tasks || [] : [];
+  },
+
+  setListTasks(listName, tasks) {
+    const lists = this.getList('lists') || [];
+    const updatedLists = lists.map(list => {
+      if (list.name === listName) {
+        list.tasks = tasks;
+      }
+      return list;
+    });
+    this.setList('lists', updatedLists);
   },
 };
 

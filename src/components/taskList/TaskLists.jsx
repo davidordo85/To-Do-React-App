@@ -13,17 +13,19 @@ function TaskLists() {
   const [confirmStep, setConfirmStep] = React.useState(0);
 
   const updateData = () => {
-    const dataFromStorage = storage.get('lists');
-    console.log(dataFromStorage);
+    const dataFromStorage = storage.getList('lists');
     if (dataFromStorage) {
       setStoredData(dataFromStorage);
     }
   };
 
   const handleAddTask = newList => {
-    const updatedTasks = [...(storedData || []), newList];
+    const updatedTasks = [
+      ...(storedData || []),
+      { name: newList.name, tasks: [] },
+    ];
     setStoredData(updatedTasks);
-    storage.set('lists', updatedTasks);
+    storage.setList('lists', updatedTasks);
   };
 
   // funcion que hace funcionar el alert correctamente
@@ -38,7 +40,7 @@ function TaskLists() {
       setShowConfirmAlert(true);
     }
     if (confirmStep === 2) {
-      storage.remove('lists');
+      storage.removeList('lists');
       setStoredData(null);
       setShowConfirmAlert(false);
       setConfirmStep(0);
@@ -95,12 +97,16 @@ function TaskLists() {
           {storedData.map((list, index) => (
             <div key={index} className={`list-container ${index}`}>
               <h3>{list.name}</h3>
-              <TaskList />
+              <TaskList
+                listName={list.name}
+                tasks={list.tasks}
+                updateData={updateData}
+              />
             </div>
           ))}
         </div>
       ) : (
-        <p>No lists available.</p>
+        <p>No lists available. Create lists!!!</p>
       )}
     </div>
   );

@@ -11,7 +11,6 @@ const TaskForm = ({ onClose, onAddTask }) => {
     description: '',
     priority: 'medium',
     estimatedDuration: 0,
-    status: 'pending',
     color: '#007bff',
     createdDate: today,
   });
@@ -35,24 +34,16 @@ const TaskForm = ({ onClose, onAddTask }) => {
     onClose();
   };
 
-  const {
-    text,
-    date,
-    description,
-    priority,
-    estimatedDuration,
-    status,
-    color,
-  } = task;
+  const { text, date, description, priority, estimatedDuration, color } = task;
 
   return (
     <form className="add-task-form" onSubmit={handleAddTask}>
       <Buttons
-        className="closed"
+        className="close"
         type="button"
         onClick={onClose}
         label="X"
-        aria-label="close-form"
+        ariaLabel="close-form"
       />
       <div className="text-input-container">
         <label htmlFor="text">Task</label>
@@ -116,19 +107,6 @@ const TaskForm = ({ onClose, onAddTask }) => {
           aria-label="Enter estimated duration"
         />
       </div>
-      <div className="status-input-container">
-        <label htmlFor="status">Status</label>
-        <select
-          id="status"
-          name="status"
-          value={status}
-          onChange={handleChange}
-          aria-label="Select task status"
-        >
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-        </select>
-      </div>
       <div className="color-input-container">
         <label htmlFor="color">Color</label>
         <input
@@ -140,9 +118,12 @@ const TaskForm = ({ onClose, onAddTask }) => {
           aria-label="Select task color"
         />
       </div>
-      <button type="submit" className="add-task">
-        Add task
-      </button>
+      <Buttons
+        label="Add task"
+        ariaLabel="Add task"
+        type="submit"
+        className="add-task"
+      />
     </form>
   );
 };
