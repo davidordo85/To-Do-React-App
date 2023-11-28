@@ -4,25 +4,46 @@
     margin-top: 1rem;
 }
 
+.create-lists-button,
+.modify-button,
+.complete-button,
+.delete-button,
 .create-task-button,
+.option-task-button,
+.add-task {
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+
+}
+
+.create-lists-button,
+.modify-button,
+.complete-button,
+.delete-button,
+.option-task-button,
+.add-task {
+    border-radius: 3rem;
+}
+
+
 .create-lists-button,
 .modify-button,
 .complete-button,
 .delete-button {
-    border-radius: 3rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    color: white;
     min-width: 30%;
 
 }
 
+.create-task-button {
+    position: absolute;
+    bottom: 0;
+    min-width: 100%;
+}
+
 .option-task-button {
     width: 50%;
-    border-radius: 3rem;
-    cursor: pointer;
     background-color: transparent;
-    color: white;
 }
 
 .create-task-button,
@@ -48,11 +69,7 @@
     background-color: #001f3f;
 }
 
-
 .add-task {
-    border-radius: 3rem;
-    padding: 0.5rem;
-    color: white;
     background-color: transparent;
     border: #001f3f solid 0.2rem;
 }
@@ -65,11 +82,10 @@
     position: absolute;
     top: -6.5%;
     left: 90%;
-    appearance: none;
-    padding: 0.1rem 0.7rem;
+    padding: 0.25rem 0.7rem 0.05rem 0.7rem;
     background-color: red;
     border: none;
-    font-size: 24px;
+    font-size: 1.3rem;
     font-weight: bold;
     color: black;
     cursor: pointer;
@@ -78,4 +94,8 @@
 
 .close:hover {
     background-color: red;
+}
+
+.form-list {
+    margin-top: -1.2rem;
 }

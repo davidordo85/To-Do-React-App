@@ -76,7 +76,6 @@ const RenderTask = ({
               type="button"
               onClick={handleDeleteTask}
             />
-            {/* Agrega otras opciones según sea necesario */}
           </div>
         )}
       </div>

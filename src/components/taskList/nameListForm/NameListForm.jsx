@@ -26,7 +26,7 @@ const NameListForm = ({ onAddNameList, onClose }) => {
       <Buttons
         label="X"
         type="button"
-        className="close"
+        className="close form-list"
         ariaLabel="close-form"
         onClick={onClose}
       />

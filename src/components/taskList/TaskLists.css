@@ -1,11 +1,18 @@
 .lists-container {
     display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+
 }
 
 .list-container {
+    position: relative;
     border: solid #001f3f 0.3rem;
+
     margin: 1rem;
     border-radius: 1rem;
+    min-height: 70vh;
+    min-width: 60vw;
 }
 
 .list-container-header {

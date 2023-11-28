@@ -27,19 +27,21 @@ const TaskList = ({ listName, tasks, updateData }) => {
   };
   return (
     <div className="tasks-list-container">
-      {tasks.length > 0 ? (
-        <div>{tasks.map((task, index) => renderTasks(task, index))}</div>
-      ) : (
-        <p>Still no tasks, would you like to create one?</p>
-      )}
-      {showForm && (
-        <div>
-          <TaskForm
-            onClose={() => setShowForm(false)}
-            onAddTask={handleAddTask}
-          />
-        </div>
-      )}
+      <div>
+        {tasks.length > 0 ? (
+          <div>{tasks.map((task, index) => renderTasks(task, index))}</div>
+        ) : (
+          <p>Still no tasks, would you like to create one?</p>
+        )}
+        {showForm && (
+          <div>
+            <TaskForm
+              onClose={() => setShowForm(false)}
+              onAddTask={handleAddTask}
+            />
+          </div>
+        )}
+      </div>
       <Buttons
         label="Create task"
         ariaLabel="Create task"
