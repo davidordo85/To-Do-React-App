@@ -36,8 +36,10 @@ const RenderTask = ({
     console.log('borrar task', index, updateData);
   };
 
+  console.log(color);
+
   return (
-    <div className="task-container">
+    <div className="task-container" style={{ backgroundColor: color }}>
       {showConfirmAlert ? (
         <Alert
           message={'Are you sure you want to delete this task?'}
@@ -56,7 +58,7 @@ const RenderTask = ({
         {optionExpanded && (
           <div className="options-task-dropdown">
             <Buttons
-              label="Detail task"
+              label="Detail"
               className="detail-task-button"
               ariaLabel="Detail task"
               type="button"
@@ -90,15 +92,6 @@ const RenderTask = ({
       {isExpanded ? (
         <>
           {' '}
-          <div className="data-container">
-            <p className="task-paragraph">
-              <strong>Task color:</strong>
-            </p>
-            <span
-              className={'task-color'}
-              style={{ backgroundColor: color }}
-            ></span>
-          </div>
           <div className="data-container">
             <p className="task-paragraph">
               <strong>Due date:</strong>

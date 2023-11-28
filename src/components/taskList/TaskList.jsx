@@ -31,7 +31,9 @@ const TaskList = ({ listName, tasks, updateData }) => {
         {tasks.length > 0 ? (
           <div>{tasks.map((task, index) => renderTasks(task, index))}</div>
         ) : (
-          <p>Still no tasks, would you like to create one?</p>
+          <p className="no-task-message">
+            Still no tasks, would you like to create one?
+          </p>
         )}
         {showForm && (
           <div>

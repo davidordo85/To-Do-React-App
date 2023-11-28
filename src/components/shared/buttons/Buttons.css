@@ -13,9 +13,11 @@
 .add-task {
     color: white;
     cursor: pointer;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
 
 }
+
+.option-task-button {}
 
 .create-lists-button,
 .modify-button,
@@ -42,8 +44,14 @@
 }
 
 .option-task-button {
-    width: 50%;
     background-color: transparent;
+}
+
+.detail-task-button,
+.modify-task-button,
+.delete-task-button {
+    background-color: transparent;
+    color: white;
 }
 
 .create-task-button,
@@ -80,7 +88,7 @@
 
 .close {
     position: absolute;
-    top: -6.5%;
+    top: -6.9%;
     left: 90%;
     padding: 0.25rem 0.7rem 0.05rem 0.7rem;
     background-color: red;
@@ -97,5 +105,5 @@
 }
 
 .form-list {
-    margin-top: -1.2rem;
+    margin-top: -1.25rem;
 }
