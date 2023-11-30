@@ -15,7 +15,7 @@ const Buttons = ({ label, className, type, onClick, ariaLabel }) => {
 };
 
 Buttons.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func,

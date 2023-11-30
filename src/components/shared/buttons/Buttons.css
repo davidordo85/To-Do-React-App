@@ -17,7 +17,16 @@
 
 }
 
-.option-task-button {}
+.delete-list-button {
+    color: red;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.delete-list-icon {
+    width: 1rem;
+    height: 1rem;
+}
 
 .create-lists-button,
 .modify-button,

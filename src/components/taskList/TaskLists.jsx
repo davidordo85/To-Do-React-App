@@ -3,6 +3,7 @@ import storage from '../../utils/storage';
 import NameListForm from './nameListForm/NameListForm';
 import TaskList from './TaskList';
 import { Buttons, Alert } from '../shared';
+import { FaTrashAlt } from 'react-icons/fa';
 import './TaskLists.css';
 
 function TaskLists() {
@@ -40,7 +41,7 @@ function TaskLists() {
       setShowConfirmAlert(true);
     }
     if (confirmStep === 2) {
-      storage.removeList('lists');
+      storage.removeLists('lists');
       setStoredData(null);
       setShowConfirmAlert(false);
       setConfirmStep(0);
@@ -96,7 +97,16 @@ function TaskLists() {
         <div className="lists-container">
           {storedData.map((list, index) => (
             <div key={index} className={`list-container ${index}`}>
-              <h1 className="list-container-header">{list.name}</h1>
+              <div className="list-container-header">
+                <h1>{list.name}</h1>
+                <Buttons
+                  label={<FaTrashAlt className="delete-list-icon" />}
+                  ariaLabel="delete-list"
+                  className="delete-list-button"
+                  type="button"
+                />
+              </div>
+
               <TaskList
                 listName={list.name}
                 tasks={list.tasks}
