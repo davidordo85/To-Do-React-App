@@ -1,15 +1,10 @@
 .task-container {
     border: solid #001f3f 0.1rem;
-    padding: 1rem;
+    padding: 1.5rem;
     margin: 0.5rem;
     border-radius: 1rem;
     position: relative;
     min-height: 3rem;
-}
-
-.task-color {
-    width: 16px;
-    height: 16px;
 }
 
 .options-task-container {

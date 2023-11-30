@@ -15,6 +15,8 @@ const RenderTask = ({
   estimatedDuration,
   priority,
   updateData,
+  onDrag,
+  onStop,
 }) => {
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
   const [optionExpanded, setOptionExpanded] = React.useState(false);
@@ -40,10 +42,14 @@ const RenderTask = ({
   const taskRef = React.useRef(null);
 
   return (
-    <Draggable nodeRef={taskRef}>
+    <Draggable
+      nodeRef={taskRef}
+      onStop={(e, data) => onStop(index, data)}
+      onDrag={(e, data) => onDrag(index, data)}
+    >
       <div
         className="task-container"
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: color, cursor: 'grab', zIndex: 1 }}
         ref={taskRef}
       >
         {showConfirmAlert ? (
@@ -149,6 +155,8 @@ RenderTask.propTypes = {
   estimatedDuration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   priority: PropTypes.string,
   updateData: PropTypes.func,
+  onDrag: PropTypes.func,
+  onStop: PropTypes.func,
 };
 
 export default RenderTask;
