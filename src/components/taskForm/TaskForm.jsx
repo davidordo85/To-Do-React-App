@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Buttons } from '../shared';
+import { Buttons, InputForm } from '../shared';
 import './TaskForm.css';
 
 const TaskForm = ({ onClose, onAddTask }) => {
@@ -45,42 +45,40 @@ const TaskForm = ({ onClose, onAddTask }) => {
         label="X"
         ariaLabel="close-form"
       />
-      <div className="text-input-container">
-        <label htmlFor="text">Task</label>
-        <input
-          type="text"
-          id="text"
-          name="text"
-          value={text}
-          onChange={handleChange}
-          aria-label="Enter your task"
-          required
-        />
-      </div>
-      <div className="date-input-container">
-        <label htmlFor="date">Due Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={date}
-          onChange={handleChange}
-          min={today}
-          aria-label="Select due date"
-        />
-      </div>
-      <div className="date-input-container">
-        <label htmlFor="date">Description</label>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          value={description}
-          onChange={handleChange}
-          aria-label="Enter your description"
-          required
-        />
-      </div>
+      <InputForm
+        label="Task"
+        className="text-input-container"
+        type="text"
+        id="text"
+        name="text"
+        value={text}
+        onChange={handleChange}
+        ariaLabel="Enter your task"
+        required
+      />
+      <InputForm
+        label="Due Date"
+        className="text-input-container"
+        type="date"
+        id="date"
+        name="date"
+        value={date}
+        onChange={handleChange}
+        min={today}
+        ariaLabel="Select due date"
+        required={false}
+      />
+      <InputForm
+        label="Description"
+        className="date-input-container"
+        type="text"
+        id="description"
+        name="description"
+        value={description}
+        onChange={handleChange}
+        ariaLabel="Enter your description"
+        required={false}
+      />
       <div className="priority-input-container">
         <label htmlFor="priority">Priority</label>
         <select
@@ -96,28 +94,28 @@ const TaskForm = ({ onClose, onAddTask }) => {
           <option value="high">High</option>
         </select>
       </div>
-      <div className="duration-input-container">
-        <label htmlFor="estimatedDuration">Estimated Duration (hours)</label>
-        <input
-          type="number"
-          id="estimatedDuration"
-          name="estimatedDuration"
-          value={estimatedDuration}
-          onChange={handleChange}
-          aria-label="Enter estimated duration"
-        />
-      </div>
-      <div className="color-input-container">
-        <label htmlFor="color">Color</label>
-        <input
-          type="color"
-          id="color"
-          name="color"
-          value={color}
-          onChange={handleChange}
-          aria-label="Select task color"
-        />
-      </div>
+      <InputForm
+        label="Estimated Duration (hours)"
+        className="duration-input-container"
+        type="number"
+        id="estimatedDuration"
+        name="estimatedDuration"
+        value={estimatedDuration}
+        onChange={handleChange}
+        ariaLabel="Enter estimated duration"
+        required={false}
+      />
+      <InputForm
+        label="Color"
+        className="color-input-container"
+        type="color"
+        id="color"
+        name="color"
+        value={color}
+        onChange={handleChange}
+        ariaLabel="Select task color"
+        required={false}
+      />
       <Buttons
         label="Add task"
         ariaLabel="Add task"

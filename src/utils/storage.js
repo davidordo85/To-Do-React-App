@@ -13,7 +13,7 @@ const storage = {
     localStorage.setItem(key, JSON.stringify(value));
   },
 
-  removeList(key) {
+  removeLists(key) {
     localStorage.removeItem(key);
   },
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Buttons } from '../../shared';
+import { Buttons, InputForm } from '../../shared';
 import PropTypes from 'prop-types';
 
 const NameListForm = ({ onAddNameList, onClose }) => {
@@ -30,18 +30,17 @@ const NameListForm = ({ onAddNameList, onClose }) => {
         ariaLabel="close-form"
         onClick={onClose}
       />
-      <div className="text-input-container">
-        <label htmlFor="name">Enter task name: </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          aria-label="Enter your task"
-          required
-        />
-      </div>
+      <InputForm
+        label="Enter task name:"
+        className="text-input-container"
+        type="text"
+        id="name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        ariaLabel="Enter your task"
+        required
+      />
       <Buttons
         label="Create list"
         className="create-lists-button"
