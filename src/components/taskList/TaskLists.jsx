@@ -13,12 +13,12 @@ function TaskLists() {
   const [message, setMessage] = React.useState('null');
   const [confirmStep, setConfirmStep] = React.useState(0);
 
-  const updateData = () => {
+  const updateData = React.useCallback(() => {
     const dataFromStorage = storage.getList('lists');
     if (dataFromStorage) {
       setStoredData(dataFromStorage);
     }
-  };
+  }, [setStoredData]);
 
   const handleAddTask = newList => {
     const updatedTasks = [
@@ -29,31 +29,59 @@ function TaskLists() {
     storage.setList('lists', updatedTasks);
   };
 
-  // funcion que hace funcionar el alert correctamente
-  const deleteTasks = React.useCallback(() => {
-    setShowConfirmAlert(true);
-    if (confirmStep === 0) {
-      setMessage('Are you sure you want to delete all lists?');
-    }
-    if (confirmStep === 1) {
-      setShowConfirmAlert(false);
-      setMessage('Are you really, really sure?');
+  const handleDeleteConfirmation = React.useCallback(
+    (index, listName) => {
       setShowConfirmAlert(true);
-    }
-    if (confirmStep === 2) {
-      storage.removeLists('lists');
-      setStoredData(null);
-      setShowConfirmAlert(false);
-      setConfirmStep(0);
-    }
-  }, [confirmStep]);
 
+      if (confirmStep === 0) {
+        console.log('paso 1', index, listName);
+        setMessage(
+          index === null
+            ? 'Are you sure you want to delete all lists?'
+            : `Are you sure you want to delete the list "${listName}"?`,
+        );
+      }
+
+      if (confirmStep === 1) {
+        setShowConfirmAlert(false);
+        setMessage('Are you really, really sure?');
+        setShowConfirmAlert(true);
+      }
+
+      if (confirmStep === 2) {
+        if (index === null) {
+          storage.removeLists('lists');
+          setStoredData(null);
+        } else {
+          storage.removeList(index);
+          updateData();
+        }
+
+        setShowConfirmAlert(false);
+        setConfirmStep(0);
+      }
+    },
+    [confirmStep, setShowConfirmAlert, setMessage, setStoredData, updateData],
+  );
+
+  const deleteLists = () => {
+    handleDeleteConfirmation(null);
+  };
+
+  const deleteList = (index, listName) => {
+    handleDeleteConfirmation(index, listName);
+  };
+
+  // Primer useEffect para updateData
   React.useEffect(() => {
     updateData();
+  }, [updateData]);
+
+  React.useEffect(() => {
     if (confirmStep > 0) {
-      deleteTasks();
+      handleDeleteConfirmation();
     }
-  }, [confirmStep, deleteTasks]);
+  }, [confirmStep, handleDeleteConfirmation]);
 
   return (
     <div>
@@ -63,7 +91,7 @@ function TaskLists() {
             label="Delete all Lists"
             ariaLabel="Delete all Lists"
             className="delete-button all"
-            onClick={deleteTasks}
+            onClick={() => deleteLists()}
             type="button"
           />
         ) : null}
@@ -104,6 +132,7 @@ function TaskLists() {
                   ariaLabel="delete-list"
                   className="delete-list-button"
                   type="button"
+                  onClick={() => deleteList(index, list.name)}
                 />
               </div>
 

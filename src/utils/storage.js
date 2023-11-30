@@ -17,6 +17,12 @@ const storage = {
     localStorage.removeItem(key);
   },
 
+  removeList(index) {
+    const lists = this.getList('lists') || [];
+    lists.splice(index, 1);
+    this.setList('lists', lists);
+  },
+
   getListTasks(listName) {
     const lists = this.getList('lists');
     console.log('lists:', lists, 'listName:', listName);
