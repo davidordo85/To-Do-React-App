@@ -20,6 +20,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
       // Lógica para manejar el soltar del task en la lista
       // Actualizar la posición final del task en el estado local
     };
+
     return (
       <RenderTask
         key={index}
@@ -43,6 +44,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
   const handleShowForm = () => {
     setShowForm(true);
   };
+
   return (
     <div className="tasks-list-container">
       <div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import Alert from '../../shared/alert/Alert';
 import Buttons from '../../shared/buttons';
+import { FaTrashAlt, FaInfoCircle, FaEdit } from 'react-icons/fa';
 import './RenderTask.css';
 
 const RenderTask = ({
@@ -19,16 +20,11 @@ const RenderTask = ({
   onStop,
 }) => {
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
-  const [optionExpanded, setOptionExpanded] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const formatDate = date => {
     const [year, month, day] = date.split('-');
     return `${day}-${month}-${year}`;
-  };
-
-  const handleToggleExpand = () => {
-    setOptionExpanded(!optionExpanded);
   };
 
   const handleDetailExpand = () => {
@@ -37,6 +33,19 @@ const RenderTask = ({
 
   const handleDeleteTask = index => {
     console.log('borrar task', index, updateData);
+  };
+
+  const handleModifyTask = () => {
+    const taskData = {
+      text,
+      date,
+      description,
+      color,
+      estimatedDuration,
+      priority,
+    };
+
+    console.log(taskData);
   };
 
   const taskRef = React.useRef(null);
@@ -61,37 +70,26 @@ const RenderTask = ({
         ) : null}
         <div className="options-task-container">
           <Buttons
-            label="..."
-            ariaLabel="options"
-            className="option-task-button"
+            label={<FaInfoCircle className="info-task-icon" />}
+            className="detail-task-button"
+            ariaLabel="Detail task"
             type="button"
-            onClick={handleToggleExpand}
+            onClick={handleDetailExpand}
           />
-          {optionExpanded && (
-            <div className="options-task-dropdown">
-              <Buttons
-                label="Detail"
-                className="detail-task-button"
-                ariaLabel="Detail task"
-                type="button"
-                onClick={handleDetailExpand}
-              />
-              <Buttons
-                label="Modify"
-                className="modify-task-button"
-                ariaLabel="Modify task"
-                type="button"
-                /* onClick={handleDeleteTask} */
-              />
-              <Buttons
-                label="Delete"
-                className="delete-task-button"
-                ariaLabel="delete task"
-                type="button"
-                onClick={handleDeleteTask}
-              />
-            </div>
-          )}
+          <Buttons
+            label={<FaEdit className="edit-task-icon" />}
+            className="modify-task-button"
+            ariaLabel="Modify task"
+            type="button"
+            onClick={() => handleModifyTask()}
+          />
+          <Buttons
+            label={<FaTrashAlt className="delete-task-icon" />}
+            className="delete-task-button"
+            ariaLabel="delete task"
+            type="button"
+            onClick={handleDeleteTask}
+          />
         </div>
         <div className="data-container">
           <div>
@@ -157,6 +155,7 @@ RenderTask.propTypes = {
   updateData: PropTypes.func,
   onDrag: PropTypes.func,
   onStop: PropTypes.func,
+  modifyTask: PropTypes.func,
 };
 
 export default RenderTask;

@@ -10,18 +10,10 @@
 .options-task-container {
     position: absolute;
     display: flex;
-    flex-direction: column;
-    top: 0;
     right: 0;
     margin-right: 1rem;
-    width: 20%;
 }
 
-.options-task-dropdown {
-    display: flex;
-    flex-direction: column;
-}
-
-.options-task-dropdown>* {
-    padding: 0.025rem;
+.options-task-container>* {
+    margin: 0.2rem;
 }

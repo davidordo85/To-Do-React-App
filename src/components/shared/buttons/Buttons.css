@@ -9,7 +9,6 @@
 .complete-button,
 .delete-button,
 .create-task-button,
-.option-task-button,
 .add-task {
     color: white;
     cursor: pointer;
@@ -60,7 +59,19 @@
 .modify-task-button,
 .delete-task-button {
     background-color: transparent;
-    color: white;
+    cursor: pointer;
+}
+
+.detail-task-button {
+    color: yellowgreen;
+}
+
+.modify-task-button {
+    color: yellow;
+}
+
+.delete-task-button {
+    color: red;
 }
 
 .create-task-button,
