@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import { Buttons, Alert } from '../../shared';
 import { FaTrashAlt, FaInfoCircle, FaEdit } from 'react-icons/fa';
+import storage from '../../../utils/storage';
 import './RenderTask.css';
 
 const RenderTask = ({
   index,
+  listName,
   text,
   date,
   description,
@@ -32,7 +34,11 @@ const RenderTask = ({
   };
 
   const handleDeleteTask = index => {
-    console.log('borrar task', index, updateData);
+    const currentTasks = storage.getListTasks(listName);
+    const updatedTasks = currentTasks.filter((_, i) => i !== index);
+    storage.setListTasks(listName, updatedTasks);
+    setShowConfirmAlert(false);
+    updateData();
   };
 
   const taskRef = React.useRef(null);
@@ -76,7 +82,7 @@ const RenderTask = ({
             className="delete-task-button"
             ariaLabel="delete task"
             type="button"
-            onClick={handleDeleteTask}
+            onClick={() => setShowConfirmAlert(true)}
           />
         </div>
         <div className="data-container">
@@ -133,6 +139,7 @@ const RenderTask = ({
 
 RenderTask.propTypes = {
   index: PropTypes.number,
+  listName: PropTypes.string,
   text: PropTypes.string,
   date: PropTypes.string,
   description: PropTypes.string,
@@ -144,6 +151,7 @@ RenderTask.propTypes = {
   onDrag: PropTypes.func,
   onStop: PropTypes.func,
   modifyTask: PropTypes.func,
+  deleteTask: PropTypes.func,
 };
 
 export default RenderTask;

@@ -25,6 +25,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
       <RenderTask
         key={index}
         index={index}
+        listName={listName}
         {...task}
         updateData={updateData}
         onDrag={handleDragTask}
