@@ -29,7 +29,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
         updateData={updateData}
         onDrag={handleDragTask}
         onStop={handleStopTask}
-        modifyTask={() => handleModifyTask(task, index)}
+        modifyTask={() => handleModifyTask(task)}
       />
     );
   };
@@ -44,10 +44,21 @@ const TaskList = ({ listName, tasks, updateData }) => {
     updateData();
   };
 
-  const handleModifyTask = (task, index) => {
+  // funcion que modifica teras
+  const handleModifyTask = task => {
     setTaskToModify(task);
     setShowForm(true);
-    console.log('modificar', task, index);
+  };
+
+  const handleUpdateTask = updatedTask => {
+    const currentTasks = storage.getListTasks(listName);
+    const updatedTasks = currentTasks.map(t =>
+      t.text === taskToModify.text ? updatedTask : t,
+    );
+    storage.setListTasks(listName, updatedTasks);
+    updateData();
+    setShowForm(false);
+    setTaskToModify(null);
   };
 
   const handleShowForm = () => {
@@ -67,8 +78,11 @@ const TaskList = ({ listName, tasks, updateData }) => {
         {showForm && (
           <div>
             <TaskForm
-              onClose={() => setShowForm(false)}
+              onClose={() => {
+                setShowForm(false), setTaskToModify(null);
+              }}
               onAddTask={handleAddTask}
+              onModifyTask={handleUpdateTask}
               taskToModify={taskToModify}
             />
           </div>

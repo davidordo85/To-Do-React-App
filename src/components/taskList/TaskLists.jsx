@@ -34,7 +34,6 @@ function TaskLists() {
       setShowConfirmAlert(true);
 
       if (confirmStep === 0) {
-        console.log('paso 1', index, listName);
         setMessage(
           index === null
             ? 'Are you sure you want to delete all lists?'

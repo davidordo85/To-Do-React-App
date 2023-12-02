@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Buttons, InputForm } from '../shared';
 import './TaskForm.css';
 
-const TaskForm = ({ onClose, onAddTask, taskToModify }) => {
+const TaskForm = ({ onClose, onAddTask, onModifyTask, taskToModify }) => {
   const today = new Date().toISOString().split('T')[0];
   const [task, setTask] = React.useState({
     text: '',
@@ -33,15 +33,14 @@ const TaskForm = ({ onClose, onAddTask, taskToModify }) => {
 
   const handleAddTask = event => {
     event.preventDefault();
-    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const newTaskList = [...storedTasks, task];
-    localStorage.setItem('tasks', JSON.stringify(newTaskList));
     onAddTask(task);
     onClose();
   };
 
   const handleModifyTask = event => {
-    console.log(event);
+    event.preventDefault();
+    onModifyTask(task);
+    onClose();
   };
 
   const { text, date, description, priority, estimatedDuration, color } = task;
@@ -150,6 +149,7 @@ const TaskForm = ({ onClose, onAddTask, taskToModify }) => {
 
 TaskForm.propTypes = {
   onAddTask: PropTypes.func,
+  onModifyTask: PropTypes.func,
   onClose: PropTypes.func,
   taskToModify: PropTypes.object,
 };

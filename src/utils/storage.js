@@ -25,9 +25,7 @@ const storage = {
 
   getListTasks(listName) {
     const lists = this.getList('lists');
-    console.log('lists:', lists, 'listName:', listName);
     const list = lists.find(list => list.name === listName);
-    console.log('list:', list);
     return list ? list.tasks || [] : [];
   },
 
@@ -40,6 +38,11 @@ const storage = {
       return list;
     });
     this.setList('lists', updatedLists);
+  },
+
+  getTask(listName, taskIndex) {
+    const tasks = this.getListTasks(listName);
+    return tasks[taskIndex] || null;
   },
 };
 
