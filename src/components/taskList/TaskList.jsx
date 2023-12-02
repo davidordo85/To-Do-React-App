@@ -9,18 +9,6 @@ import storage from '../../utils/storage';
 const TaskList = ({ listName, tasks, updateData }) => {
   const [showForm, setShowForm] = React.useState(false);
   const renderTasks = (task, index) => {
-    const handleDragTask = (taskIndex, dragData) => {
-      console.log('handleDragTask: ', taskIndex, dragData);
-      // Lógica para manejar el arrastre del task en la lista
-      // Actualizar la posición del task en el estado local
-    };
-
-    const handleStopTask = (taskIndex, dragData) => {
-      console.log('handleStopTask: ', taskIndex, dragData);
-      // Lógica para manejar el soltar del task en la lista
-      // Actualizar la posición final del task en el estado local
-    };
-
     return (
       <RenderTask
         key={index}
@@ -28,8 +16,6 @@ const TaskList = ({ listName, tasks, updateData }) => {
         listName={listName}
         {...task}
         updateData={updateData}
-        onDrag={handleDragTask}
-        onStop={handleStopTask}
         modifyTask={() => handleModifyTask(task)}
       />
     );
