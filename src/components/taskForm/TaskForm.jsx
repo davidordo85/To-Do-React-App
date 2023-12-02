@@ -40,10 +40,17 @@ const TaskForm = ({ onClose, onAddTask, taskToModify }) => {
     onClose();
   };
 
+  const handleModifyTask = event => {
+    console.log(event);
+  };
+
   const { text, date, description, priority, estimatedDuration, color } = task;
 
   return (
-    <form className="add-task-form" onSubmit={handleAddTask}>
+    <form
+      className="add-task-form"
+      onSubmit={taskToModify ? handleModifyTask : handleAddTask}
+    >
       <Buttons
         className="close"
         type="button"
@@ -122,12 +129,21 @@ const TaskForm = ({ onClose, onAddTask, taskToModify }) => {
         ariaLabel="Select task color"
         required={false}
       />
-      <Buttons
-        label="Add task"
-        ariaLabel="Add task"
-        type="submit"
-        className="add-task"
-      />
+      {taskToModify ? (
+        <Buttons
+          label="Modify task"
+          ariaLabel="Modify task"
+          type="submit"
+          className="add-task"
+        />
+      ) : (
+        <Buttons
+          label="Add task"
+          ariaLabel="Add task"
+          type="submit"
+          className="add-task"
+        />
+      )}
     </form>
   );
 };

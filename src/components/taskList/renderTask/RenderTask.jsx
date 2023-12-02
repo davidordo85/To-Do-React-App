@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import Alert from '../../shared/alert/Alert';
-import Buttons from '../../shared/buttons';
+import { Buttons, Alert } from '../../shared';
 import { FaTrashAlt, FaInfoCircle, FaEdit } from 'react-icons/fa';
 import './RenderTask.css';
 
@@ -18,6 +17,7 @@ const RenderTask = ({
   updateData,
   onDrag,
   onStop,
+  modifyTask,
 }) => {
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
@@ -33,19 +33,6 @@ const RenderTask = ({
 
   const handleDeleteTask = index => {
     console.log('borrar task', index, updateData);
-  };
-
-  const handleModifyTask = () => {
-    const taskData = {
-      text,
-      date,
-      description,
-      color,
-      estimatedDuration,
-      priority,
-    };
-
-    console.log(taskData);
   };
 
   const taskRef = React.useRef(null);
@@ -68,6 +55,7 @@ const RenderTask = ({
             onConfirm={() => handleDeleteTask(index)}
           />
         ) : null}
+
         <div className="options-task-container">
           <Buttons
             label={<FaInfoCircle className="info-task-icon" />}
@@ -81,7 +69,7 @@ const RenderTask = ({
             className="modify-task-button"
             ariaLabel="Modify task"
             type="button"
-            onClick={() => handleModifyTask()}
+            onClick={() => modifyTask()}
           />
           <Buttons
             label={<FaTrashAlt className="delete-task-icon" />}

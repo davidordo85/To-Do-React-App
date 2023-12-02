@@ -29,9 +29,12 @@ const TaskList = ({ listName, tasks, updateData }) => {
         updateData={updateData}
         onDrag={handleDragTask}
         onStop={handleStopTask}
+        modifyTask={() => handleModifyTask(task, index)}
       />
     );
   };
+
+  const [taskToModify, setTaskToModify] = React.useState(null);
 
   // funcion que añade nuevas tareas
   const handleAddTask = newTask => {
@@ -39,6 +42,12 @@ const TaskList = ({ listName, tasks, updateData }) => {
     const updatedTasks = [...currentTasks, newTask];
     storage.setListTasks(listName, updatedTasks);
     updateData();
+  };
+
+  const handleModifyTask = (task, index) => {
+    setTaskToModify(task);
+    setShowForm(true);
+    console.log('modificar', task, index);
   };
 
   const handleShowForm = () => {
@@ -60,6 +69,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
             <TaskForm
               onClose={() => setShowForm(false)}
               onAddTask={handleAddTask}
+              taskToModify={taskToModify}
             />
           </div>
         )}
