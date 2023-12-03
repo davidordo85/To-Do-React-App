@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Buttons, InputForm } from '../shared';
+import { v4 as uuidv4 } from 'uuid';
 import './TaskForm.css';
 
 const TaskForm = ({ onClose, onAddTask, onModifyTask, taskToModify }) => {
@@ -13,6 +14,7 @@ const TaskForm = ({ onClose, onAddTask, onModifyTask, taskToModify }) => {
     estimatedDuration: 0,
     color: '#007bff',
     createdDate: today,
+    id: uuidv4(),
   });
 
   React.useEffect(() => {

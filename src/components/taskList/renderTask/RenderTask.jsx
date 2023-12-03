@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Buttons, Alert } from '../../shared';
 import { FaTrashAlt, FaInfoCircle, FaEdit } from 'react-icons/fa';
 import storage from '../../../utils/storage';
+import { useDrag } from 'react-dnd';
+import { ItemTypes } from '../../../utils/constants';
 import './RenderTask.css';
 
 const RenderTask = ({
@@ -10,6 +12,7 @@ const RenderTask = ({
   listName,
   text,
   date,
+  id,
   description,
   color,
   createdDate,
@@ -18,6 +21,13 @@ const RenderTask = ({
   updateData,
   modifyTask,
 }) => {
+  const [, drag] = useDrag({
+    type: ItemTypes.TASK,
+    item: { index, listName, id },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
 
@@ -39,7 +49,11 @@ const RenderTask = ({
   };
 
   return (
-    <div className="task-container" style={{ backgroundColor: color }}>
+    <div
+      ref={drag}
+      className="task-container"
+      style={{ backgroundColor: color }}
+    >
       {showConfirmAlert ? (
         <Alert
           message={'Are you sure you want to delete this task?'}
@@ -126,6 +140,7 @@ RenderTask.propTypes = {
   index: PropTypes.number,
   listName: PropTypes.string,
   text: PropTypes.string,
+  id: PropTypes.string,
   date: PropTypes.string,
   description: PropTypes.string,
   color: PropTypes.string,

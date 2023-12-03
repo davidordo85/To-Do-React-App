@@ -5,9 +5,50 @@ import TaskForm from '../taskForm';
 import './TaskList.css';
 import { Buttons } from '../shared';
 import storage from '../../utils/storage';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from '../../utils/constants';
 
 const TaskList = ({ listName, tasks, updateData }) => {
   const [showForm, setShowForm] = React.useState(false);
+  const [, drop] = useDrop({
+    accept: ItemTypes.TASK,
+    drop: item => {
+      console.log('Dropping item with ID: ', item.id);
+      const { listName: sourceList, id: taskId } = item;
+      console.log(item);
+
+      if (sourceList !== listName) {
+        console.log('Dropping into a different list:', listName);
+        const sourceTasks = storage.getListTasks(sourceList);
+        const destinationTasks = storage.getListTasks(listName);
+
+        const taskToMove = sourceTasks.find(task => task.id === taskId);
+
+        console.log('Task to move:', taskToMove);
+        console.log('Source tasks before move:', sourceTasks);
+        console.log('Destination tasks before move:', destinationTasks);
+
+        if (taskToMove) {
+          storage.setListTasks(listName, [...destinationTasks, taskToMove]);
+          console.log('Destination tasks after move:', [
+            ...destinationTasks,
+            taskToMove,
+          ]);
+
+          const updatedSourceTasks = sourceTasks.filter(
+            task => task.id !== taskId,
+          );
+
+          console.log('Updated source tasks after move:', updatedSourceTasks);
+
+          storage.setListTasks(sourceList, updatedSourceTasks);
+        }
+
+        updateData();
+      }
+    },
+  });
+
   const renderTasks = (task, index) => {
     return (
       <RenderTask
@@ -53,7 +94,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
   };
 
   return (
-    <div className="tasks-list-container">
+    <div className="tasks-list-container" ref={drop}>
       <div>
         {tasks.length > 0 ? (
           <div>{tasks.map((task, index) => renderTasks(task, index))}</div>
