@@ -31,6 +31,28 @@ The ToDo app is a task management application that allows users to organize thei
 - **Move Tasks Between Lists:**
   - Tasks can be easily moved between different lists to adapt to changing priorities or categories.
 
+## Data Storage
+
+This application uses local storage to store your task lists and tasks on your device. Local storage is a simple and secure way to ensure that your data is saved, allowing you to access your tasks even if you close or refresh your browser. Rest assured that your information is stored locally and is not shared with any external services.
+
+## Privacy Information
+
+This application uses your browser's local storage to save your task lists and tasks directly on your device. Your data remains on your device and is not sent or stored on external servers. We respect your privacy, and your information is entirely under your control.
+
+### What is Stored Locally?
+
+- Task Lists: Names of your task lists.
+- Tasks: Details such as task names, due dates, descriptions, priorities, and estimated durations.
+
+### Your Control:
+
+- Your data is fully controlled by you, and it is stored securely within your browser's local storage.
+- No data is transmitted to external servers.
+
+### Data Security:
+
+- We prioritize the security of your data, and it is stored following the security measures of your browser's local storage.
+
 ## Getting Started
 
 Follow these steps to set up the ToDo app on your local machine:

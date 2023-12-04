@@ -23,3 +23,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.explanatory-text-container>p {
+    padding: 0.5rem;
+}

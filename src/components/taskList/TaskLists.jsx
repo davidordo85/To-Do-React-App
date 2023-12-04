@@ -151,7 +151,14 @@ function TaskLists() {
           ))}
         </div>
       ) : (
-        <p>No lists available. Create lists!!!</p>
+        <div className="explanatory-text-container">
+          <p>
+            This site uses browser local storage to save your lists and tasks.
+            Your data stays on your device and is not sent or stored on external
+            servers.
+          </p>
+          <p>No lists available. Create lists!!!</p>
+        </div>
       )}
     </div>
   );

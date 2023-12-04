@@ -6,4 +6,5 @@
 
 .no-task-message {
     white-space: pre-wrap;
+    padding: 0.5rem;
 }
