@@ -12,6 +12,8 @@ function TaskLists() {
   const [showConfirmAlert, setShowConfirmAlert] = React.useState(false);
   const [message, setMessage] = React.useState('null');
   const [confirmStep, setConfirmStep] = React.useState(0);
+  const indexRef = React.useRef(null);
+  const listNameRef = React.useRef(null);
 
   const updateData = React.useCallback(() => {
     const dataFromStorage = storage.getList('lists');
@@ -34,6 +36,7 @@ function TaskLists() {
       setShowConfirmAlert(true);
 
       if (confirmStep === 0) {
+        console.log('index confirm step 0: ', index, confirmStep);
         setMessage(
           index === null
             ? 'Are you sure you want to delete all lists?'
@@ -42,19 +45,26 @@ function TaskLists() {
       }
 
       if (confirmStep === 1) {
+        console.log('index confirm step 1: ', index, confirmStep);
         setShowConfirmAlert(false);
         setMessage('Are you really, really sure?');
         setShowConfirmAlert(true);
       }
 
       if (confirmStep === 2) {
+        console.log('index confirm step 2: ', index);
         if (index === null) {
+          console.log('borrar todas las listas');
           storage.removeLists('lists');
           setStoredData(null);
         } else {
+          console.log(`borrar lista ${index}`);
           storage.removeList(index);
           updateData();
         }
+
+        indexRef.current = null;
+        listNameRef.current = null;
 
         setShowConfirmAlert(false);
         setConfirmStep(0);
@@ -64,10 +74,12 @@ function TaskLists() {
   );
 
   const deleteLists = () => {
-    handleDeleteConfirmation(null);
+    handleDeleteConfirmation(indexRef.current, listNameRef.current);
   };
 
   const deleteList = (index, listName) => {
+    indexRef.current = index;
+    listNameRef.current = listName;
     handleDeleteConfirmation(index, listName);
   };
 
@@ -78,7 +90,7 @@ function TaskLists() {
 
   React.useEffect(() => {
     if (confirmStep > 0) {
-      handleDeleteConfirmation();
+      handleDeleteConfirmation(indexRef.current, listNameRef.current);
     }
   }, [confirmStep, handleDeleteConfirmation]);
 
