@@ -50,11 +50,26 @@ const RenderTask = ({
     updateData();
   };
 
+  function isColorLight(hexColor) {
+    // Convertir el color hexadecimal a RGB
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+
+    // Calcular el índice de luminosidad (fórmula simple)
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Si la luminosidad es mayor que 0.5, el color es claro
+    return luminance > 0.5;
+  }
+
+  const textColor = isColorLight(color) ? 'black' : 'white';
+
   return (
     <div
       ref={drag}
       className="task-container"
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: color, color: textColor }}
     >
       {showConfirmAlert ? (
         <Alert
