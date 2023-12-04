@@ -1,10 +1,10 @@
-.add-task-form {
+.add-task-form,
+.add-list-form {
     display: flex;
     flex-direction: column;
     position: absolute;
-    min-width: 60%;
+    min-width: 50%;
     top: 50%;
-    left: 50%;
     padding: 1.25rem;
     border: 2rem solid #001f3f;
     background-color: #003366;
@@ -15,13 +15,22 @@
     animation: grow 1s forwards;
 }
 
+.add-list-form {
+    left: 50%;
+}
+
+.add-task-form {
+    left: 65%;
+}
+
 @keyframes grow {
     to {
         transform: translate(-50%, -50%) scale(1);
     }
 }
 
-.add-task-form>div {
+.add-task-form>div,
+.add-list-form>div {
     display: flex;
     flex-direction: column;
     padding: 0.5rem;

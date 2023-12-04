@@ -22,7 +22,7 @@ const NameListForm = ({ onAddNameList, onClose }) => {
   };
 
   return (
-    <form className="add-task-form" onSubmit={handleAddList}>
+    <form className="add-list-form" onSubmit={handleAddList}>
       <Buttons
         label="X"
         type="button"
