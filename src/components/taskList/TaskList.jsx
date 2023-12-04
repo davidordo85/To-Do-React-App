@@ -13,9 +13,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
   const [, drop] = useDrop({
     accept: ItemTypes.TASK,
     drop: item => {
-      console.log('Dropping item with ID: ', item.id);
       const { listName: sourceList, id: taskId } = item;
-      console.log(item);
 
       if (sourceList !== listName) {
         const sourceTasks = storage.getListTasks(sourceList);
@@ -25,10 +23,6 @@ const TaskList = ({ listName, tasks, updateData }) => {
 
         if (taskToMove) {
           storage.setListTasks(listName, [...destinationTasks, taskToMove]);
-          console.log('Destination tasks after move:', [
-            ...destinationTasks,
-            taskToMove,
-          ]);
 
           const updatedSourceTasks = sourceTasks.filter(
             task => task.id !== taskId,
