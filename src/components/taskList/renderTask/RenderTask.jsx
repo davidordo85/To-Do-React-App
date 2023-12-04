@@ -79,7 +79,10 @@ const RenderTask = ({
         />
       ) : null}
 
-      <div className="options-task-container">
+      <div
+        className="options-task-container"
+        style={isColorLight(color) ? { backgroundColor: 'gray' } : null}
+      >
         <Buttons
           label={<FaInfoCircle className="info-task-icon" />}
           className="detail-task-button"
