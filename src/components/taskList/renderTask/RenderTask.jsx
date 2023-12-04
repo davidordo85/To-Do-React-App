@@ -36,10 +36,12 @@ const RenderTask = ({
     return `${day}-${month}-${year}`;
   };
 
+  // funcion para mostrar los detalles de la tarea
   const handleDetailExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
+  // funcion para borrar la tarea
   const handleDeleteTask = index => {
     const currentTasks = storage.getListTasks(listName);
     const updatedTasks = currentTasks.filter((_, i) => i !== index);

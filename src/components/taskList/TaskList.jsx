@@ -18,15 +18,10 @@ const TaskList = ({ listName, tasks, updateData }) => {
       console.log(item);
 
       if (sourceList !== listName) {
-        console.log('Dropping into a different list:', listName);
         const sourceTasks = storage.getListTasks(sourceList);
         const destinationTasks = storage.getListTasks(listName);
 
         const taskToMove = sourceTasks.find(task => task.id === taskId);
-
-        console.log('Task to move:', taskToMove);
-        console.log('Source tasks before move:', sourceTasks);
-        console.log('Destination tasks before move:', destinationTasks);
 
         if (taskToMove) {
           storage.setListTasks(listName, [...destinationTasks, taskToMove]);
@@ -38,8 +33,6 @@ const TaskList = ({ listName, tasks, updateData }) => {
           const updatedSourceTasks = sourceTasks.filter(
             task => task.id !== taskId,
           );
-
-          console.log('Updated source tasks after move:', updatedSourceTasks);
 
           storage.setListTasks(sourceList, updatedSourceTasks);
         }
@@ -72,12 +65,13 @@ const TaskList = ({ listName, tasks, updateData }) => {
     updateData();
   };
 
-  // funcion que modifica teras
+  // funcion que muestra el formulario para modificar tareas
   const handleModifyTask = task => {
     setTaskToModify(task);
     setShowForm(true);
   };
 
+  // funcion que modifica tareas
   const handleUpdateTask = updatedTask => {
     const currentTasks = storage.getListTasks(listName);
     const updatedTasks = currentTasks.map(t =>
@@ -89,6 +83,7 @@ const TaskList = ({ listName, tasks, updateData }) => {
     setTaskToModify(null);
   };
 
+  // funcion que muestra el formulario para crear tareas
   const handleShowForm = () => {
     setShowForm(true);
   };
