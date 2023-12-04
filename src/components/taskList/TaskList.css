@@ -1,7 +1,7 @@
 .tasks-list-container {
     display: flex;
     flex-direction: column;
-    min-height: 50vw;
+    min-height: 50vh;
 }
 
 .no-task-message {

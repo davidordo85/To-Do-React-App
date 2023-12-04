@@ -27,3 +27,12 @@
 .explanatory-text-container>p {
     padding: 0.5rem;
 }
+
+@media (min-width: 500px) {
+
+    .list-container {
+        min-width: 30vw;
+    }
+
+
+}

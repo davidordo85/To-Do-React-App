@@ -130,7 +130,7 @@ function TaskLists() {
       {Array.isArray(storedData) && storedData.length > 0 ? (
         <div className="lists-container">
           {storedData.map((list, index) => (
-            <div key={index} className={`list-container ${index}`}>
+            <div key={index} className={`list-container`}>
               <div className="list-container-header">
                 <h1>{list.name}</h1>
                 <Buttons
