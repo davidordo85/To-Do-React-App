@@ -69,8 +69,9 @@ const TaskList = ({ listName, tasks, updateData }) => {
   const handleUpdateTask = updatedTask => {
     const currentTasks = storage.getListTasks(listName);
     const updatedTasks = currentTasks.map(t =>
-      t.text === taskToModify.text ? updatedTask : t,
+      t.id === taskToModify.id ? updatedTask : t,
     );
+    console.log(updatedTasks);
     storage.setListTasks(listName, updatedTasks);
     updateData();
     setShowForm(false);
