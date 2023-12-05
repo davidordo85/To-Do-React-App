@@ -71,7 +71,6 @@ const TaskList = ({ listName, tasks, updateData }) => {
     const updatedTasks = currentTasks.map(t =>
       t.id === taskToModify.id ? updatedTask : t,
     );
-    console.log(updatedTasks);
     storage.setListTasks(listName, updatedTasks);
     updateData();
     setShowForm(false);
