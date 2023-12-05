@@ -53,6 +53,10 @@ This application uses your browser's local storage to save your task lists and t
 
 - We prioritize the security of your data, and it is stored following the security measures of your browser's local storage.
 
+## Demo
+
+Explore the live demo of the ToDo app [here](https://davidordo85.github.io/To-Do-React-App/).
+
 ## Getting Started
 
 Follow these steps to set up the ToDo app on your local machine:
